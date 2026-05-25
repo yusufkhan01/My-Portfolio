@@ -1,0 +1,13 @@
+:root {
+  --bs-primary-rgb: 0, 123, 255;
+  --bs-link-color-rgb: 0, 123, 255;
+}
+
+.btn-primary {
+  --bs-btn-bg: #007bff;
+  --bs-btn-border-color: #007bff;
+  --bs-btn-hover-bg: #006fe6;
+  --bs-btn-hover-border-color: #006fe6;
+}
+
+.case-img { height: 200px; object-fit: cover; }
