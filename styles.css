@@ -11,3 +11,44 @@
 }
 
 .case-img { height: 200px; object-fit: cover; }
+
+/* Offset anchor jumps so sections aren't hidden behind the sticky navbar */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 64px;
+}
+
+/* Car detailing service site hero */
+.detail-hero {
+  min-height: 70vh;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+    url("https://images.unsplash.com/photo-1526297293668-36b3f33a373b?auto=format&fit=crop&w=1600&q=80")
+      center 95% / cover no-repeat;
+}
+
+/* Booking section: clean-car background, lighter overlay so the car shows */
+.booking-bg {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80")
+      center / cover no-repeat fixed;
+}
+
+/* Frosted-glass booking form card (no solid grey block) */
+.booking-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+.booking-card .form-label { color: #fff; }
+.booking-card .form-control,
+.booking-card .form-select {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+.booking-card .form-control::placeholder { color: rgba(255, 255, 255, 0.7); }
+.booking-card .form-select option { color: #000; }
