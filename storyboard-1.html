@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Storyboard 1 — Lewis · Distinct Detailing Ottawa</title>
+  <style>
+    :root {
+      --bg: #0c0c0e;
+      --panel: #16161a;
+      --red: #e10600;
+      --muted: #9a9aa2;
+      --line: #2a2a30;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: #fff;
+      padding: 48px 24px 72px;
+      line-height: 1.5;
+    }
+    .wrap { max-width: 1200px; margin: 0 auto; }
+    .eyebrow { color: var(--red); letter-spacing: .25em; text-transform: uppercase; font-size: 13px; font-weight: 700; }
+    h1 { font-size: 44px; font-weight: 800; letter-spacing: -.5px; margin: 6px 0 10px; text-transform: uppercase; }
+    .persona { color: var(--muted); max-width: 720px; font-size: 16px; }
+    .persona strong { color: #fff; }
+    .goal { display: inline-block; margin-top: 16px; background: var(--red); color: #fff; font-weight: 700; padding: 8px 16px; border-radius: 999px; font-size: 14px; }
+
+    .strip { display: flex; gap: 18px; align-items: stretch; margin-top: 44px; flex-wrap: wrap; justify-content: center; }
+    .step { flex: 1 1 300px; max-width: 340px; }
+    .step-label { font-size: 13px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: .12em; margin-bottom: 10px; }
+    .step-desc { color: var(--muted); font-size: 13px; margin-top: 10px; }
+
+    /* Phone mockup frame */
+    .phone {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 14px;
+      height: 540px;
+      display: flex; flex-direction: column;
+      box-shadow: 0 20px 50px rgba(0,0,0,.5);
+      position: relative;
+    }
+    .notch { width: 90px; height: 6px; background: #333; border-radius: 999px; margin: 2px auto 12px; }
+    .screen { flex: 1; border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; }
+
+    /* Screen 1 — hero */
+    .hero {
+      flex: 1;
+      background:
+        linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.7)),
+        url("https://images.unsplash.com/photo-1526297293668-36b3f33a373b?auto=format&fit=crop&w=800&q=80") center 75% / cover;
+      display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;
+    }
+    .hero small { color: var(--red); text-transform: uppercase; letter-spacing: .15em; font-size: 11px; font-weight: 700; }
+    .hero h2 { font-size: 26px; font-weight: 800; text-transform: uppercase; margin: 8px 0 14px; }
+    .btn-red { background: var(--red); color: #fff; border: 0; font-weight: 700; padding: 12px 18px; border-radius: 8px; font-size: 14px; width: 100%; }
+    .btn-ghost { background: transparent; color: #fff; border: 1px solid #fff; font-weight: 700; padding: 10px 18px; border-radius: 8px; font-size: 13px; width: 100%; margin-top: 8px; }
+    .ring { outline: 3px solid var(--red); outline-offset: 3px; border-radius: 8px; }
+
+    /* Screen 2 — form */
+    .form { flex: 1; background: #101014; padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+    .form h3 { font-size: 18px; font-weight: 800; }
+    .field { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+    .control { background: #1d1d22; border: 1px solid var(--line); border-radius: 8px; padding: 11px 12px; font-size: 14px; color: #fff; }
+    .control.sel { border-color: var(--red); color: #fff; font-weight: 700; }
+    .row2 { display: flex; gap: 10px; }
+    .row2 > div { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+
+    /* Screen 3 — confirm */
+    .confirm { flex: 1; background: #101014; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 24px; }
+    .check { width: 76px; height: 76px; border-radius: 50%; background: var(--red); display: flex; align-items: center; justify-content: center; font-size: 40px; margin-bottom: 18px; }
+    .confirm h3 { font-size: 22px; font-weight: 800; text-transform: uppercase; }
+    .summary { background: #1d1d22; border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin-top: 16px; width: 100%; font-size: 13px; text-align: left; }
+    .summary span { color: var(--muted); }
+    .back { margin-top: 30px; }
+    a.home { color: var(--muted); text-decoration: none; font-size: 14px; }
+    a.home:hover { color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Storyboard 1 · Theme: Bold / Dark</p>
+    <h1>Lewis Hamilton — “The Car Enthusiast”</h1>
+    <p class="persona">
+      <strong>Intrinsic:</strong> detail-oriented and very proud of his car &amp; build · values quality over price · wants a quick, responsive service with a clean interface.
+      <br><strong>Tech:</strong> high — books online directly through the site, very comfortable with apps and forms. <strong>Domain:</strong> high — owns a high-powered performance car and knows the packages.
+    </p>
+    <span class="goal">Goal: quickly book a Ceramic Coating appointment for a specific date &amp; time, no contact needed</span>
+
+    <div class="strip">
+
+      <!-- Step 1 -->
+      <div class="step">
+        <div class="step-label">Step 1 — Land & tap CTA</div>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="screen">
+            <div class="hero">
+              <small>Premium Car Care · Ottawa</small>
+              <h2>Distinct Detailing Ottawa</h2>
+              <button class="btn-red ring">Book your detail</button>
+              <button class="btn-ghost">View services</button>
+            </div>
+          </div>
+        </div>
+        <p class="step-desc">Marcus opens the site, sees the hero, and taps the bold red “Book your detail” call-to-action.</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step">
+        <div class="step-label">Step 2 — Pick service, date, time</div>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="screen">
+            <div class="form">
+              <h3>Book an appointment</h3>
+              <span class="field">Service</span>
+              <div class="control sel">Ceramic Coating — $450 ▾</div>
+              <div class="row2">
+                <div>
+                  <span class="field">Date</span>
+                  <div class="control">Jun 14, 2026</div>
+                </div>
+                <div>
+                  <span class="field">Time</span>
+                  <div class="control">10:30 AM</div>
+                </div>
+              </div>
+              <button class="btn-red ring" style="margin-top:8px;">Submit booking</button>
+            </div>
+          </div>
+        </div>
+        <p class="step-desc">He selects “Ceramic Coating”, picks a date and time, and submits — all on one focused screen.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step">
+        <div class="step-label">Step 3 — Confirmation</div>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="screen">
+            <div class="confirm">
+              <div class="check">✓</div>
+              <h3>Request sent</h3>
+              <div class="summary">
+                <div><span>Service:</span> Ceramic Coating — $450</div>
+                <div><span>Date:</span> Jun 14, 2026</div>
+                <div><span>Time:</span> 10:30 AM</div>
+                <div style="margin-top:8px;">We’ll call to confirm.</div>
+              </div>
+              <div class="back"><a class="home" href="case-1.html">← Back to home</a></div>
+            </div>
+          </div>
+        </div>
+        <p class="step-desc">An inline confirmation echoes his booking and tells him the shop will call to confirm.</p>
+      </div>
+
+    </div>
+
+    <p style="margin-top:48px;"><a class="home" href="index.html">← Back to portfolio</a></p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Storyboard 2 — Bob · Distinct Detailing Ottawa</title>
+  <style>
+    :root {
+      --bg: #eef2f6;
+      --card: #ffffff;
+      --ink: #1f2933;
+      --muted: #6b7785;
+      --teal: #0d9488;
+      --teal-soft: #d7f0ec;
+      --line: #e3e8ee;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--bg);
+      color: var(--ink);
+      padding: 48px 24px 72px;
+      line-height: 1.6;
+    }
+    .wrap { max-width: 1200px; margin: 0 auto; }
+    .eyebrow { color: var(--teal); letter-spacing: .18em; text-transform: uppercase; font-size: 12px; font-weight: 700; font-family: Arial, sans-serif; }
+    h1 { font-size: 38px; font-weight: 700; margin: 8px 0 12px; }
+    .persona { color: var(--muted); max-width: 760px; font-size: 16px; }
+    .persona strong { color: var(--ink); }
+    .goal { display: inline-block; margin-top: 18px; background: var(--teal-soft); color: var(--teal); font-weight: 700; padding: 9px 18px; border-radius: 8px; font-size: 14px; font-family: Arial, sans-serif; }
+
+    .strip { display: flex; gap: 22px; align-items: stretch; margin-top: 46px; flex-wrap: wrap; justify-content: center; }
+    .step { flex: 1 1 300px; max-width: 350px; }
+    .step-label { font-size: 12px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: .12em; margin-bottom: 10px; font-family: Arial, sans-serif; }
+    .step-desc { color: var(--muted); font-size: 14px; margin-top: 12px; }
+
+    /* Browser window mockup frame */
+    .browser {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      height: 520px;
+      display: flex; flex-direction: column;
+      box-shadow: 0 14px 40px rgba(31,41,51,.12);
+    }
+    .chrome { background: #f3f5f8; border-bottom: 1px solid var(--line); padding: 10px 12px; display: flex; align-items: center; gap: 6px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+    .url { flex: 1; margin-left: 10px; background: #fff; border: 1px solid var(--line); border-radius: 6px; font-size: 11px; color: var(--muted); padding: 4px 10px; font-family: Arial, sans-serif; }
+    .view { flex: 1; padding: 20px; overflow: hidden; font-family: Arial, sans-serif; }
+
+    .view h2 { font-family: Georgia, serif; font-size: 22px; margin-bottom: 4px; }
+    .view .sub { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+
+    /* Step 1 — service grid */
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .scard { border: 1px solid var(--line); border-radius: 12px; padding: 14px; text-align: center; }
+    .scard.hl { border-color: var(--teal); background: var(--teal-soft); }
+    .scard .nm { font-size: 14px; font-weight: 700; }
+    .scard .pr { font-size: 22px; font-weight: 700; color: var(--teal); margin: 6px 0; font-family: Georgia, serif; }
+    .scard .dn { font-size: 11px; color: var(--muted); }
+    .badge { display:inline-block; background: var(--teal); color:#fff; font-size:10px; font-weight:700; padding:2px 8px; border-radius:999px; margin-bottom:6px; }
+
+    /* Step 2 — detail/compare */
+    .detail { border: 1px solid var(--teal); border-radius: 12px; padding: 18px; background: #fff; }
+    .detail .pr { font-size: 30px; font-weight: 700; color: var(--teal); font-family: Georgia, serif; }
+    .inc { list-style: none; margin-top: 12px; }
+    .inc li { font-size: 13px; padding: 7px 0; border-bottom: 1px dashed var(--line); color: var(--ink); }
+    .inc li:before { content: "✓"; color: var(--teal); font-weight: 700; margin-right: 8px; }
+    .compare { font-size: 12px; color: var(--muted); margin-top: 14px; }
+
+    /* Step 3 — contact */
+    .contact-row { display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; margin-bottom: 10px; }
+    .ic { width: 38px; height: 38px; border-radius: 9px; background: var(--teal-soft); color: var(--teal); display: flex; align-items: center; justify-content: center; font-size: 18px; flex: none; }
+    .contact-row .lab { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+    .contact-row .val { font-size: 14px; font-weight: 700; }
+
+    a.home { color: var(--muted); text-decoration: none; font-size: 14px; font-family: Arial, sans-serif; }
+    a.home:hover { color: var(--ink); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Storyboard 2 · Theme: Light / Clean</p>
+    <h1>Bob — “The Newbie”</h1>
+    <p class="persona">
+      <strong>Intrinsic:</strong> busy with kids/work · budget-conscious · cautious about trying a new business.
+      <br><strong>Tech:</strong> moderate — uses the web for everyday tasks but prefers simple, guided layouts and old-school contact (email/phone).
+      <strong>Domain:</strong> low — new to detailing, unsure which package he needs.
+    </p>
+    <span class="goal">Goal: compare services &amp; prices, then find contact info to ask before booking</span>
+
+    <div class="strip">
+
+      <!-- Step 1 -->
+      <div class="step">
+        <div class="step-label">Step 1 — Browse &amp; compare</div>
+        <div class="browser">
+          <div class="chrome">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="url">distinctdetailing.ca/#services</span>
+          </div>
+          <div class="view">
+            <h2>Our services</h2>
+            <p class="sub">Pick the package that fits your ride.</p>
+            <div class="grid">
+              <div class="scard"><div class="nm">Basic Wash</div><div class="pr">$25</div><div class="dn">Exterior hand wash &amp; dry</div></div>
+              <div class="scard"><div class="nm">Interior Detail</div><div class="pr">$80</div><div class="dn">Deep vacuum &amp; steam</div></div>
+              <div class="scard hl"><span class="badge">Most popular</span><div class="nm">Full Detail</div><div class="pr">$150</div><div class="dn">Inside &amp; out</div></div>
+              <div class="scard"><div class="nm">Ceramic Coating</div><div class="pr">$450</div><div class="dn">Paint protection</div></div>
+            </div>
+          </div>
+        </div>
+        <p class="step-desc">Bob scans all four packages and prices side by side; the “Most popular” tag helps him orient as a newcomer.</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step">
+        <div class="step-label">Step 2 — Read the details</div>
+        <div class="browser">
+          <div class="chrome">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="url">distinctdetailing.ca/#services</span>
+          </div>
+          <div class="view">
+            <h2>Basic Wash</h2>
+            <p class="sub">A budget-friendly starting point.</p>
+            <div class="detail">
+              <div class="pr">$25</div>
+              <ul class="inc">
+                <li>Exterior hand wash</li>
+                <li>Wheel clean &amp; tire shine</li>
+                <li>Streak-free hand dry</li>
+              </ul>
+            </div>
+            <p class="compare">Compared to the $150 Full Detail, the Basic Wash fits his budget for a first try.</p>
+          </div>
+        </div>
+        <p class="step-desc">He reads what each package includes in plain language to understand what he’s paying for.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step">
+        <div class="step-label">Step 3 — Find contact info</div>
+        <div class="browser">
+          <div class="chrome">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="url">distinctdetailing.ca/#contact</span>
+          </div>
+          <div class="view">
+            <h2>Get in touch</h2>
+            <p class="sub">Reach out with any question before booking.</p>
+            <div class="contact-row"><div class="ic">✆</div><div><div class="lab">Phone</div><div class="val">(613) 620-3865</div></div></div>
+            <div class="contact-row"><div class="ic">✉</div><div><div class="lab">Email</div><div class="val">contact@distinctdetailing.ca</div></div></div>
+            <div class="contact-row"><div class="ic">◷</div><div><div class="lab">Hours</div><div class="val">Mon–Fri 8am–6pm</div></div></div>
+          </div>
+        </div>
+        <p class="step-desc">Cautious about a new business, Bob finds clear phone/email/hours so he can ask a question first.</p>
+      </div>
+
+    </div>
+
+    <p style="margin-top:48px;"><a class="home" href="index.html">← Back to portfolio</a></p>
+  </div>
+</body>
+</html>
