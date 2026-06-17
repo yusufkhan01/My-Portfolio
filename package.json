@@ -1,0 +1,16 @@
+{
+  "name": "distinct-detailing-ottawa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Distinct Detailing Ottawa — React service site prototype (bundled with esbuild).",
+  "scripts": {
+    "build": "esbuild src/case-1.jsx --bundle --minify --jsx=automatic --define:process.env.NODE_ENV=\\\"production\\\" --outfile=case-1.bundle.js"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0"
+  }
+}

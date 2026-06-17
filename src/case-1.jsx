@@ -1,0 +1,297 @@
+import React, { useState, useEffect } from "react";
+import { createRoot } from "react-dom/client";
+
+const SERVICES = [
+  {
+    name: "Basic Wash",
+    price: "$25",
+    desc: "Exterior hand wash, wheel clean, tire shine, and a streak-free dry.",
+  },
+  {
+    name: "Interior Detail",
+    price: "$80",
+    desc: "Deep vacuum, steam clean, leather conditioning, and glass polish.",
+  },
+  {
+    name: "Full Detail",
+    price: "$150",
+    desc: "Complete inside-and-out detail with clay bar, wax, and trim restore.",
+    popular: true,
+  },
+  {
+    name: "Ceramic Coating",
+    price: "$450",
+    desc: "Long-lasting paint protection with deep gloss and hydrophobic shine.",
+  },
+];
+
+function Navbar() {
+  return (
+    <nav className="navbar navbar-expand-md navbar-dark bg-black sticky-top border-bottom border-danger">
+      <div className="container">
+        <a className="navbar-brand fw-bold" href="#home">
+          Distinct<span className="text-danger">Detailing</span>
+        </a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#nav"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="nav">
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item"><a className="nav-link" href="#services">Services</a></li>
+            <li className="nav-item"><a className="nav-link" href="#booking">Booking</a></li>
+            <li className="nav-item"><a className="nav-link" href="#about">About</a></li>
+            <li className="nav-item"><a className="nav-link" href="#contact">Contact</a></li>
+            <li className="nav-item"><a className="nav-link" href="index.html">← Portfolio</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+function Hero() {
+  return (
+    <header id="home" className="detail-hero text-white text-center d-flex align-items-center">
+      <div className="container py-5">
+        <small className="text-uppercase fw-semibold text-danger">Premium Car Care · Ottawa</small>
+        <h1 className="display-3 fw-bold mb-3">Distinct Detailing Ottawa</h1>
+        <p className="lead mb-4 mx-auto" style={{ maxWidth: "620px" }}>
+          Showroom-quality detailing for your vehicle. From a quick wash to full
+          ceramic protection, we treat every car like it's our own.
+        </p>
+        <a href="#booking" className="btn btn-danger btn-lg me-2">Book your detail</a>
+        <a href="#services" className="btn btn-outline-light btn-lg">View services</a>
+      </div>
+    </header>
+  );
+}
+
+function ServiceCard({ service, onBook }) {
+  return (
+    <div className="col-sm-6 col-lg-3">
+      <div className={"card h-100 text-center" + (service.popular ? " border-danger" : "")}>
+        <div className="card-body d-flex flex-column">
+          {service.popular && <span className="badge bg-danger mb-2 align-self-center">Most popular</span>}
+          <h3 className="h5">{service.name}</h3>
+          <p className="display-6 fw-bold text-danger my-3">{service.price}</p>
+          <p className="small text-muted">{service.desc}</p>
+          <button
+            type="button"
+            className="btn btn-outline-danger btn-sm mt-auto"
+            onClick={() => onBook(service)}
+          >
+            Book
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Services({ onBook }) {
+  return (
+    <section id="services" className="py-5">
+      <div className="container">
+        <div className="text-center mb-5">
+          <h2 className="fw-bold">Our services.</h2>
+          <p className="text-muted">Pick the package that fits your ride.</p>
+        </div>
+        <div className="row g-4">
+          {SERVICES.map((s) => (
+            <ServiceCard key={s.name} service={s} onBook={onBook} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Booking({ selectedService, onConsumeSelection }) {
+  const [service, setService] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [message, setMessage] = useState("");
+  const [validated, setValidated] = useState(false);
+
+  useEffect(() => {
+    if (selectedService) {
+      setService(`${selectedService.name} — ${selectedService.price}`);
+      onConsumeSelection();
+    }
+  }, [selectedService]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!service || !date || !time) {
+      setValidated(true);
+      return;
+    }
+    setMessage(`Thanks! Your "${service}" is requested for ${date} at ${time}. We'll call to confirm.`);
+    setService("");
+    setDate("");
+    setTime("");
+    setValidated(false);
+  };
+
+  return (
+    <section id="booking" className="py-5 booking-bg">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-lg-7">
+            <div className="text-center mb-4 text-white">
+              <h2 className="fw-bold">Book an appointment.</h2>
+              <p className="text-white-50">Choose a service, date, and time — we'll confirm by phone.</p>
+            </div>
+            <div className="card booking-card shadow">
+              <div className="card-body p-4">
+                <form
+                  onSubmit={handleSubmit}
+                  noValidate
+                  className={validated ? "was-validated" : ""}
+                >
+                  <div className="mb-3">
+                    <label htmlFor="service" className="form-label">Service</label>
+                    <select
+                      className="form-select"
+                      id="service"
+                      required
+                      value={service}
+                      onChange={(e) => setService(e.target.value)}
+                    >
+                      <option value="" disabled>Choose a service…</option>
+                      {SERVICES.map((s) => (
+                        <option key={s.name}>{s.name} — {s.price}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-6 mb-3">
+                      <label htmlFor="date" className="form-label">Date</label>
+                      <input
+                        type="date"
+                        className="form-control"
+                        id="date"
+                        required
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
+                      />
+                    </div>
+                    <div className="col-md-6 mb-3">
+                      <label htmlFor="time" className="form-label">Time</label>
+                      <input
+                        type="time"
+                        className="form-control"
+                        id="time"
+                        required
+                        value={time}
+                        onChange={(e) => setTime(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <button type="submit" className="btn btn-danger w-100">Submit booking</button>
+                  {message && (
+                    <div className="alert alert-success mt-3 mb-0" role="alert">
+                      {message}
+                    </div>
+                  )}
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function About() {
+  return (
+    <section id="about" className="py-5">
+      <div className="container">
+        <div className="row justify-content-center text-center">
+          <div className="col-lg-8">
+            <h2 className="fw-bold mb-3">About us.</h2>
+            <p>
+              Distinct Detailing Ottawa is a locally owned shop dedicated to bringing out the
+              best in every vehicle. With meticulous attention to detail and
+              professional-grade products, we deliver results that last.
+            </p>
+            <p className="text-muted mb-0">Designed by <strong>Yusuf Khan</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Contact() {
+  return (
+    <section id="contact" className="py-5 bg-black text-white">
+      <div className="container">
+        <div className="text-center mb-5">
+          <h2 className="fw-bold">Get in touch.</h2>
+          <p className="text-white-50">Questions or a custom request? Reach out anytime.</p>
+        </div>
+        <div className="row text-center g-4">
+          <div className="col-md-3">
+            <h3 className="h6 text-danger">Phone</h3>
+            <p className="mb-0">(613) 620-3865</p>
+          </div>
+          <div className="col-md-3">
+            <h3 className="h6 text-danger">Email</h3>
+            <p className="mb-0">contact@distinctdetailing.ca</p>
+          </div>
+          <div className="col-md-3">
+            <h3 className="h6 text-danger">Address</h3>
+            <p className="mb-0">123 City Rd<br />Ottawa, ON</p>
+          </div>
+          <div className="col-md-3">
+            <h3 className="h6 text-danger">Hours</h3>
+            <p className="mb-0">Mon–Fri: 8am–6pm<br />Sat: 9am–4pm<br />Sun: Closed</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="bg-black text-white-50 text-center py-4 border-top border-danger">
+      <div className="container">
+        <p className="mb-0 small">© 2026 Distinct Detailing Ottawa · Designed by Yusuf Khan</p>
+      </div>
+    </footer>
+  );
+}
+
+function App() {
+  const [selectedService, setSelectedService] = useState(null);
+
+  const handleBook = (service) => {
+    setSelectedService(service);
+    document.getElementById("booking").scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <React.Fragment>
+      <Navbar />
+      <Hero />
+      <Services onBook={handleBook} />
+      <Booking
+        selectedService={selectedService}
+        onConsumeSelection={() => setSelectedService(null)}
+      />
+      <About />
+      <Contact />
+      <Footer />
+    </React.Fragment>
+  );
+}
+
+createRoot(document.getElementById("root")).render(<App />);
