@@ -52,3 +52,298 @@ html {
 }
 .booking-card .form-control::placeholder { color: rgba(255, 255, 255, 0.7); }
 .booking-card .form-select option { color: #000; }
+
+/* =========================================================================
+   Car Memory Match (case-2) — dark car-themed memory game
+   Design tokens keep colors, spacing and typography consistent across the
+   three screens (setup -> game -> results).
+   ========================================================================= */
+.cm-app {
+  --cm-bg: #0c0c0e;
+  --cm-panel: #16161a;
+  --cm-panel-2: #1d1d22;
+  --cm-line: #2a2a30;
+  --cm-red: #e10600;
+  --cm-text: #ffffff;
+  --cm-muted: #9a9aa2;
+  --cm-radius: 14px;
+  --cm-gap: 16px;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(225, 6, 0, 0.18), transparent 60%),
+    var(--cm-bg);
+  color: var(--cm-text);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+/* --- Top bar + footer ---------------------------------------------------- */
+.cm-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--cm-line);
+}
+.cm-brand { font-weight: 800; letter-spacing: -0.5px; font-size: 20px; }
+.cm-home { color: var(--cm-muted); text-decoration: none; font-size: 14px; font-weight: 600; }
+.cm-home:hover, .cm-home:focus-visible { color: #fff; }
+
+.cm-main {
+  flex: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 20px 48px;
+}
+.cm-footer {
+  border-top: 1px solid var(--cm-line);
+  color: var(--cm-muted);
+  text-align: center;
+  padding: 18px;
+}
+
+/* --- Shared panel (setup + results) ------------------------------------- */
+.cm-panel {
+  max-width: 760px;
+  background: var(--cm-panel);
+  border: 1px solid var(--cm-line);
+  border-radius: var(--cm-radius);
+  padding: 32px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+.cm-eyebrow {
+  display: inline-block;
+  color: var(--cm-red);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.cm-title {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin: 0 0 10px;
+}
+
+/* --- Setup groups (Gestalt: proximity groups related controls) ---------- */
+.cm-group { border: 0; margin: 0 0 22px; padding: 0; }
+.cm-group-label {
+  float: none;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cm-muted);
+  margin-bottom: 12px;
+}
+.cm-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--cm-gap);
+}
+
+/* Option buttons share one style (Gestalt: similarity) */
+.cm-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: var(--cm-panel-2);
+  border: 2px solid var(--cm-line);
+  border-radius: 12px;
+  padding: 18px 12px;
+  color: var(--cm-text);
+  cursor: pointer;
+  transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+}
+.cm-option:hover { transform: translateY(-3px); border-color: #44444c; }
+.cm-option--active {
+  border-color: var(--cm-red);
+  background: rgba(225, 6, 0, 0.12);
+}
+.cm-option-emoji { font-size: 30px; line-height: 1; }
+.cm-option-title { font-weight: 700; font-size: 16px; }
+.cm-option-sub { font-size: 12px; color: var(--cm-muted); }
+.cm-option-best { font-size: 11px; color: var(--cm-red); font-weight: 700; margin-top: 2px; }
+
+/* --- Game: stats bar (proximity: live info grouped) --------------------- */
+.cm-game { width: 100%; }
+.cm-statsbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: var(--cm-panel);
+  border: 1px solid var(--cm-line);
+  border-radius: var(--cm-radius);
+  padding: 14px 18px;
+}
+.cm-stats { display: flex; gap: 28px; }
+.cm-stat { display: flex; flex-direction: column; }
+.cm-stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cm-muted);
+}
+.cm-stat-value { font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.cm-actions { display: flex; gap: 8px; }
+
+.cm-progress {
+  height: 8px;
+  background: var(--cm-panel-2);
+  border-radius: 999px;
+  margin: 16px 0 22px;
+}
+.cm-progress .progress-bar { transition: width 0.3s ease; }
+
+/* --- Card grid (responsive column counts per difficulty) ---------------- */
+.cm-grid {
+  display: grid;
+  gap: var(--cm-gap);
+  grid-template-columns: repeat(4, 1fr);
+}
+.cm-grid[data-difficulty="hard"] { grid-template-columns: repeat(6, 1fr); }
+
+/* --- Flip card (Gestalt: figure-ground via shadow on dark bg) ----------- */
+.cm-card {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  perspective: 800px;
+}
+.cm-card:disabled { cursor: default; }
+
+.cm-card-inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.45s ease;
+  border-radius: 12px;
+}
+.cm-card--open .cm-card-inner { transform: rotateY(180deg); }
+
+.cm-card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+}
+.cm-card-back {
+  font-size: clamp(24px, 5vw, 40px);
+  background: linear-gradient(145deg, #1d1d22, #101014);
+  border: 1px solid var(--cm-line);
+  color: var(--cm-muted);
+}
+.cm-card-front {
+  transform: rotateY(180deg);
+  background: linear-gradient(145deg, #23232a, #17171b);
+  border: 1px solid var(--cm-line);
+  padding: 6px;
+}
+.cm-card-emoji { font-size: clamp(26px, 5vw, 42px); line-height: 1; }
+/* Light chip behind the logo so colored/dark brand logos stay visible on the
+   dark card (figure-ground) */
+.cm-logo-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64%;
+  aspect-ratio: 1 / 1;
+  background: #fff;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+.cm-card-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.cm-card-name {
+  font-size: clamp(10px, 1.6vw, 13px);
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+}
+.cm-card--matched .cm-card-front {
+  border-color: var(--cm-red);
+  background: linear-gradient(145deg, rgba(225, 6, 0, 0.28), rgba(225, 6, 0, 0.12));
+}
+.cm-card:not(:disabled):hover .cm-card-inner { transform: translateY(-4px); }
+.cm-card--open:not(:disabled):hover .cm-card-inner { transform: rotateY(180deg) translateY(-4px); }
+
+/* --- Results screen ----------------------------------------------------- */
+.cm-results { max-width: 620px; }
+.cm-result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--cm-gap);
+  margin: 26px 0 18px;
+}
+.cm-result-card {
+  background: var(--cm-panel-2);
+  border: 1px solid var(--cm-line);
+  border-radius: 12px;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cm-result-value { font-size: 30px; font-weight: 800; color: var(--cm-red); }
+.cm-result-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cm-muted);
+}
+.cm-best-line { color: var(--cm-muted); font-size: 14px; }
+.cm-best-line strong { color: #fff; }
+.cm-result-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+/* --- Accessibility: clear keyboard focus ring everywhere ---------------- */
+.cm-app .btn:focus-visible,
+.cm-option:focus-visible,
+.cm-card:focus-visible,
+.cm-home:focus-visible {
+  outline: 3px solid #ffd000;
+  outline-offset: 3px;
+}
+
+/* --- Responsive: simpler columns on small screens ----------------------- */
+@media (max-width: 640px) {
+  .cm-options { grid-template-columns: 1fr; }
+  .cm-grid,
+  .cm-grid[data-difficulty="hard"] { grid-template-columns: repeat(3, 1fr); }
+  .cm-stats { gap: 18px; }
+  .cm-panel { padding: 22px; }
+}
+
+/* --- Respect users who prefer reduced motion ---------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .cm-card-inner,
+  .cm-option,
+  .cm-progress .progress-bar { transition: none; }
+}
