@@ -4,9 +4,11 @@
   "private": true,
   "description": "Distinct Detailing Ottawa — React service site prototype (bundled with esbuild).",
   "scripts": {
-    "build": "npm run build:case-1 && npm run build:case-2",
+    "dev": "esbuild src/case-3.jsx --bundle --jsx=automatic --define:process.env.NODE_ENV=\\\"development\\\" --outfile=case-3.bundle.js --servedir=. --serve=0.0.0.0:5173",
+    "build": "npm run build:case-1 && npm run build:case-2 && npm run build:case-3",
     "build:case-1": "esbuild src/case-1.jsx --bundle --minify --jsx=automatic --define:process.env.NODE_ENV=\\\"production\\\" --outfile=case-1.bundle.js",
-    "build:case-2": "esbuild src/case-2.jsx --bundle --minify --jsx=automatic --define:process.env.NODE_ENV=\\\"production\\\" --outfile=case-2.bundle.js"
+    "build:case-2": "esbuild src/case-2.jsx --bundle --minify --jsx=automatic --define:process.env.NODE_ENV=\\\"production\\\" --outfile=case-2.bundle.js",
+    "build:case-3": "esbuild src/case-3.jsx --bundle --minify --jsx=automatic --define:process.env.NODE_ENV=\\\"production\\\" --outfile=case-3.bundle.js"
   },
   "dependencies": {
     "react": "^18.3.1",
