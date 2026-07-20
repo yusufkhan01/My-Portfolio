@@ -830,3 +830,337 @@ html {
 @media (prefers-reduced-motion: reduce) {
   .dp-card, .dp-cat-tile, .dp-card-img, .dp-ship-fill, .dp-toast, .dp-rate-star, .dp-filters { transition: none; animation: none; }
 }
+
+/* =========================================================================
+   Canadian Vehicle Maintenance Dashboard (case-4) — bilingual analytics
+   Namespaced under .vm-app so it never touches case-1 / case-2 / case-3.
+   Reuses the same design tokens as the DetailPro store (light surfaces,
+   charcoal headings, blue accent, amber highlight) for a consistent
+   portfolio look (C: contrast — one accent + one highlight; clutter-free).
+   ========================================================================= */
+.vm-app {
+  --vm-bg: #f4f6f8;
+  --vm-surface: #ffffff;
+  --vm-charcoal: #0f1115;
+  --vm-charcoal-2: #191d26;
+  --vm-ink: #14171f;
+  --vm-muted: #6b7280;
+  --vm-line: #e5e7eb;
+  --vm-accent: #2563eb;
+  --vm-accent-2: #1d4ed8;
+  --vm-accent-soft: #eef4ff;
+  --vm-amber: #f59e0b;
+  --vm-amber-2: #b45309;
+  --vm-amber-soft: #fff7ed;
+  --vm-radius: 16px;
+  --vm-radius-sm: 10px;
+  --vm-shadow: 0 8px 30px rgba(2, 6, 23, 0.08);
+  --vm-shadow-lg: 0 24px 60px rgba(2, 6, 23, 0.16);
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--vm-bg);
+  color: var(--vm-ink);
+  font-family: "Inter", "Helvetica Neue", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  line-height: 1.55;
+}
+.vm-app *,
+.vm-app *::before,
+.vm-app *::after { box-sizing: border-box; }
+.vm-app h1, .vm-app h2, .vm-app h3, .vm-app p { margin: 0; }
+
+/* Screen-reader-only text: non-visual chart summaries + live status. */
+.vm-sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Header -------------------------------------------------------------- */
+.vm-header {
+  background: linear-gradient(160deg, var(--vm-charcoal) 0%, var(--vm-charcoal-2) 100%);
+  color: #fff;
+}
+.vm-header-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px 34px;
+}
+.vm-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.vm-header-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.vm-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #c4ccd8;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+}
+.vm-back:hover, .vm-back:focus-visible { color: #fff; }
+
+.vm-eyebrow {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 12px;
+  font-weight: 800;
+  color: #9ec2ff;
+  margin-bottom: 10px;
+}
+.vm-title { font-size: clamp(24px, 4vw, 38px); font-weight: 800; letter-spacing: -0.02em; }
+.vm-subtitle {
+  margin-top: 10px;
+  max-width: 720px;
+  color: #c4ccd8;
+  font-size: clamp(15px, 2vw, 17px);
+}
+.vm-notice {
+  margin-top: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(245, 158, 11, 0.14);
+  color: #fde3b3;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* --- Language selector (text only, no country flags) -------------------- */
+.vm-lang { display: inline-flex; align-items: center; gap: 6px; }
+.vm-lang-label { font-size: 13px; font-weight: 700; color: #c4ccd8; }
+.vm-lang-btn {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: transparent;
+  color: #e5e7eb;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.vm-lang-btn:hover { border-color: #fff; color: #fff; }
+.vm-lang-btn.is-active {
+  background: var(--vm-accent);
+  border-color: var(--vm-accent);
+  color: #fff;
+}
+
+/* --- Buttons ------------------------------------------------------------- */
+.vm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 8px 16px;
+  line-height: 1.1;
+  transition: transform 0.08s ease, background 0.15s ease, box-shadow 0.15s ease,
+    color 0.15s ease, border-color 0.15s ease;
+}
+.vm-btn:active { transform: translateY(1px); }
+.vm-btn--ghost {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.vm-btn--ghost:hover { background: rgba(255, 255, 255, 0.16); }
+
+/* --- Main layout --------------------------------------------------------- */
+.vm-main {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 20px 48px;
+}
+
+/* --- KPI cards ----------------------------------------------------------- */
+.vm-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.vm-kpi {
+  background: var(--vm-surface);
+  border: 1px solid var(--vm-line);
+  border-radius: var(--vm-radius);
+  padding: 18px 18px 16px;
+  box-shadow: var(--vm-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.vm-kpi-label { font-size: 13px; font-weight: 700; color: var(--vm-muted); }
+.vm-kpi-value {
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: var(--vm-ink);
+  overflow-wrap: anywhere;
+}
+.vm-kpi-sub { font-size: 12px; color: var(--vm-muted); }
+.vm-kpi--accent { border-color: var(--vm-amber); background: var(--vm-amber-soft); }
+.vm-kpi--accent .vm-kpi-value { color: var(--vm-amber-2); }
+.vm-kpi--accent .vm-kpi-label { color: var(--vm-amber-2); }
+
+/* --- Chart cards --------------------------------------------------------- */
+.vm-charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 22px;
+}
+.vm-card {
+  background: var(--vm-surface);
+  border: 1px solid var(--vm-line);
+  border-radius: var(--vm-radius);
+  padding: 20px;
+  box-shadow: var(--vm-shadow);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.vm-card-head { margin-bottom: 14px; }
+.vm-card-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--vm-ink);
+  letter-spacing: -0.01em;
+}
+.vm-card-explain { margin-top: 6px; font-size: 14px; color: var(--vm-muted); }
+
+/* --- Controls (grouped right above the chart they affect) --------------- */
+.vm-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.vm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  flex: 1 1 200px;
+}
+.vm-field-label {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--vm-muted);
+}
+.vm-select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  border: 1px solid var(--vm-line);
+  border-radius: var(--vm-radius-sm);
+  padding: 9px 34px 9px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vm-ink);
+  cursor: pointer;
+}
+.vm-select:hover { border-color: #cbd5e1; }
+
+/* Segmented control (metric toggle) — selected option clearly stands out. */
+.vm-seg {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  background: #f1f5f9;
+  border: 1px solid var(--vm-line);
+  border-radius: 999px;
+  padding: 3px;
+}
+.vm-seg-btn {
+  border: 0;
+  background: transparent;
+  color: var(--vm-muted);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+.vm-seg-btn:hover { color: var(--vm-ink); }
+.vm-seg-btn.is-active {
+  background: #fff;
+  color: var(--vm-accent);
+  box-shadow: 0 1px 3px rgba(2, 6, 23, 0.12);
+}
+
+/* --- Chart area ---------------------------------------------------------- */
+.vm-chart { width: 100%; }
+.vm-empty {
+  color: var(--vm-muted);
+  font-size: 14px;
+  text-align: center;
+  padding: 40px 0;
+}
+
+/* --- Footer -------------------------------------------------------------- */
+.vm-footer {
+  background: var(--vm-charcoal);
+  color: #9aa4b2;
+  text-align: center;
+  padding: 22px;
+  font-size: 13px;
+}
+
+/* --- Accessibility: clear keyboard focus ring --------------------------- */
+.vm-app a:focus-visible,
+.vm-app button:focus-visible,
+.vm-app select:focus-visible {
+  outline: 3px solid var(--vm-accent);
+  outline-offset: 2px;
+}
+.vm-header a:focus-visible,
+.vm-header button:focus-visible {
+  outline-color: #9ec2ff;
+}
+
+/* --- Responsive ---------------------------------------------------------- */
+@media (max-width: 992px) {
+  .vm-charts { grid-template-columns: 1fr; }
+  .vm-kpis { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .vm-kpis { grid-template-columns: 1fr; }
+  .vm-field { flex-basis: 100%; }
+  .vm-header-inner { padding-bottom: 26px; }
+}
+
+/* --- Respect reduced motion --------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .vm-btn, .vm-lang-btn, .vm-seg-btn, .vm-select { transition: none; }
+}
